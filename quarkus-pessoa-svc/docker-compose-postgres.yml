@@ -1,0 +1,13 @@
+version: '3.1'
+
+services:
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: limite_passwd
+      POSTGRES_USER: limite
+      POSTGRES_DB: pessoas
+    ports:
+      - "5430:5432"

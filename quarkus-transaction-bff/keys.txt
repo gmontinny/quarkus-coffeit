@@ -1,0 +1,32 @@
+## Assinatura e Criptografia
+
+openssl genrsa -out src/main/resources/rsaPrivateKey.pem 2048
+openssl rsa -pubout -in src/main/resources/rsaPrivateKey.pem -out src/main/resources/publicKey.pem
+openssl pkcs8 -topk8 -nocrypt -inform pem -in src/main/resources/rsaPrivateKey.pem -outform pem -out src/main/resources/privateKey.pem
+
+## Certificado
+
+openssl req -x509 -sha256 -nodes -days 365 -newkey rsa:2048 -keyout src/main/resources/cerPrivateKey.key -out src/main/resources/certificate.crt
+
+## Keystore
+
+keytool -genkeypair -storepass password -keyalg RSA -keysize 2048 -dname "CN=coffeeandit" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore src/main/resources/META-INF/resources/server.keystore
+keytool -genkeypair -storepass password -keyalg RSA -keysize 2048 -dname "CN=client" -alias client -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore src/main/resources/META-INF/resources/client.keystore
+
+keytool -v -list -keystore src/main/resources/META-INF/resources/server.keystore
+keytool -v -list -keystore src/main/resources/META-INF/resources/client.keystore
+
+
+
+## mTLS
+
+cp src/main/resources/META-INF/resources/server.keystore src/main/resources/META-INF/resources/client.truststore
+cp src/main/resources/META-INF/resources/client.keystore src/main/resources/META-INF/resources/server.truststore
+
+keytool -export -alias client -keystore src/main/resources/META-INF/resources/server.truststore -rfc -file src/main/resources/public.cert
+keytool -v -importkeystore -srckeystore src/main/resources/META-INF/resources/server.truststore -srcalias client -destkeystore src/main/resources/myp12file.p12 -deststoretype PKCS12
+openssl pkcs12 -in src/main/resources/myp12file.p12 -out src/main/resources/private.pem
+openssl rsa -in src/main/resources/private.pem -out src/main/resources/newkey.pem
+
+
+

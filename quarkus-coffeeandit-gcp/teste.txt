@@ -1,0 +1,3 @@
+curl -X POST https://us-central1-static-balm-268911.cloudfunctions.net/function-1
+ -H "Content-Type:application/json"  -d '{"name":"Jane"}'
+curl -X GET https://us-central1-static-balm-268911.cloudfunctions.net/httpFunction -H "Content-Type:application/json"  -d '{"name":"Jane"}'

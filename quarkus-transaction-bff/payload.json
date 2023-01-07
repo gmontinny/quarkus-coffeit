@@ -1,0 +1,11 @@
+{
+  "beneficiario": {
+    "agencia": "1210",
+    "codigoBanco": 341,
+    "conta": "101214",
+    "cpf": 12735354,
+    "nomeFavorecido": "JOSÉ DOS SANTOS"
+  },
+  "tipoTransacao": "PAGAMENTO_TRIBUTOS",
+  "valor": 140
+}

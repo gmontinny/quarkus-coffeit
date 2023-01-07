@@ -1,0 +1,8 @@
+curl --location --request POST 'https://keycloak.coffeeandit.com.br/auth/realms/master/protocol/openid-connect/token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'password=n_BQ6KgdGb4~MFwJ' \
+--data-urlencode 'grant_type=password' \
+--data-urlencode 'client_id=coffeeandit' \
+--data-urlencode 'scope=openid' \
+--data-urlencode 'username=coffeeandit'
